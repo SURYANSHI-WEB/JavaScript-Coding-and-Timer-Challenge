@@ -30,20 +30,22 @@ A one-hour countdown timer with start, pause, and reset controls. Displays time 
 
 ## Setup Instructions
 
-No installations required for any task.
+Make sure Node.js is installed.
 
 ---
 
 ## How to Run
 
-**Tasks 1–3:** Make sure Node.js is installed. Open a terminal in the project folder and run:
+**Tasks 1–3:** Open a terminal in the project folder and run:
 ```
+cd "Task 1-3"
 node second-largest.js
 node unique-elements.js
 node student-average.js
 ```
 
 **Task 4:**
-1. Open the `Task4-Timer` folder
-2. Open `index.html` in any browser
-3. Click **Start** to begin the countdown
+```
+cd "Task-4 Timer"
+```
+Then open `index.html` in any browser and click **Start** to begin the countdown.
