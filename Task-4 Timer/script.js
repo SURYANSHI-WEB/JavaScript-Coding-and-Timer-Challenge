@@ -1,62 +1,54 @@
-// Total countdown time in seconds (3600 = 1 hour)
-let totalSeconds = 3600;
-let timerInterval;
-let isRunning = false;
+let totalSeconds = 3600; 
+let timerInterval; 
+let isRunning = false; 
 
-// Get references to HTML elements
 let display = document.getElementById('display');
 let message = document.getElementById('message');
 
-// Converts seconds into MM:SS format and updates the display
+// show time in MM:SS
 function updateDisplay() {
-  let minutes = Math.floor(totalSeconds / 60);
-  let seconds = totalSeconds % 60;
-
-  // Pad single digits with a leading zero e.g. 5 → 05
-  let mm = String(minutes).padStart(2, '0');
+  let minutes = Math.floor(totalSeconds / 60); 
+  let seconds = totalSeconds % 60; 
+  let mm = String(minutes).padStart(2, '0'); 
   let ss = String(seconds).padStart(2, '0');
-
   display.textContent = mm + ':' + ss;
 }
-updateDisplay(); // Show initial time on page load
 
-// Starts the countdown
+updateDisplay(); // run once so display isn't blank on load
+
 function startTimer() {
-  if (isRunning) return; // Prevent double start
+  if (isRunning) return; // stop double clicks from creating multiple intervals
   isRunning = true;
-  display.classList.add('pulsing'); // Start glow animation
+  display.classList.add('pulsing'); // glow effect while running
 
-  // Runs every 1 second
   timerInterval = setInterval(function() {
-    if (totalSeconds <= 0) {
-      clearInterval(timerInterval); // Stop timer at zero
+    if (totalSeconds <= 0) { // don't go below zero
+      clearInterval(timerInterval);
       message.textContent = "Time's up!";
       isRunning = false;
       return;
     }
-    totalSeconds--;
+    totalSeconds--; // count down by 1 each second
     updateDisplay();
-  }, 1000);
+  }, 1000); // fires every 1000ms = 1 second
 }
 
-// Pauses the countdown
 function pauseTimer() {
-  clearInterval(timerInterval);
+  clearInterval(timerInterval); // stops the interval without resetting time
   isRunning = false;
-  display.classList.remove('pulsing'); // Stop glow animation
+  display.classList.remove('pulsing');
 }
 
-// Resets the countdown back to 1 hour
+// reset everything back to 1 hour
 function resetTimer() {
   clearInterval(timerInterval);
   isRunning = false;
   display.classList.remove('pulsing');
-  totalSeconds = 3600;
+  totalSeconds = 3600; // back to start
   updateDisplay();
-  message.textContent = '';
+  message.textContent = ''; // clear the time's up message
 }
 
-// Connect buttons to their functions
 document.getElementById('startBtn').addEventListener('click', startTimer);
 document.getElementById('pauseBtn').addEventListener('click', pauseTimer);
 document.getElementById('resetBtn').addEventListener('click', resetTimer);
